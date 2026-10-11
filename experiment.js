@@ -19,7 +19,28 @@ const jsPsych = initJsPsych({
       type: jsPsychExtensionPipe,
       params: {
         experiment_id: DATAPIPE_EXPERIMENT_ID,
-        filename: () => `${participantId}.csv`
+        filename: () => `${participantId}.csv`,
+        wait_message: `
+          <div class="survey-card welcome-card">
+            <h1>Ukládání odpovědí…</h1>
+            <p>Prosím, nezavírejte tuto stránku.</p>
+          </div>`,
+        done_message: `
+          <div class="survey-card welcome-card">
+            <h1>Děkujeme</h1>
+            <p>Vaše odpovědi byly úspěšně uloženy.</p>
+            <p>Nyní můžete toto okno zavřít.</p>
+          </div>`,
+        on_save: (result) => {
+          console.log("DataPipe final save result:", result);
+          if (!result.ok) {
+            document.body.innerHTML = `
+              <div class="survey-card welcome-card">
+                <h1>Odpovědi se nepodařilo uložit</h1>
+                <p>Prosím, nezavírejte tuto stránku a kontaktujte výzkumníka.</p>
+              </div>`;
+          }
+        }
       }
     }
   ]
@@ -264,17 +285,6 @@ const finalSurvey = {
 };
 
 
-const thanks = {
-  type: jsPsychHtmlButtonResponse,
-  stimulus: `
-    <div class="survey-card welcome-card">
-      <h1>Děkujeme</h1>
-      <p>Vaše odpovědi byly zaznamenány.</p>
-      <p>Nyní můžete toto okno zavřít.</p>
-    </div>`,
-  choices: [],
-  data: { trial_kind: "thank_you" }
-};
 
 async function createExperiment() {
   try {
@@ -314,8 +324,7 @@ async function createExperiment() {
   jsPsych.run([
     welcome,
     ...stimulusTrials,
-    finalSurvey,
-    thanks
+    finalSurvey
   ]);
 }
 
