@@ -222,10 +222,13 @@ const welcome = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
     <div class="survey-card welcome-card">
-      <h1>Vítejte v pretestu</h1>
-      <p>V průběhu dotazníku uvidíte <strong>tři příspěvky</strong> a u každého z nich odpovíte na několik otázek o tom, jak na Vás působí.</p>
-      <p>Neexistují správné ani špatné odpovědi. Odpovídejte prosím podle svého vlastního dojmu.</p>
-      <p>Vyplnění zabere přibližně <strong>7–10 minut</strong>.</p>
+      <h1>Výzkum politické komunikace</h1>
+
+      <p>V následujícím dotazníku uvidíte několik krátkých politických příspěvků podobných těm, které se mohou objevit na sociálních sítích. Po každém příspěvku budete požádán/a o jeho zhodnocení.</p>
+
+      <p>Vyplnění dotazníku zabere přibližně <strong>8 minut</strong>. Odpovědi jsou zcela anonymní a budou využity pouze pro účely akademického výzkumu. Výzkum je součástí širšího projektu, jehož další fáze bude realizována ve spolupráci s agenturou <strong>NMS Market Research</strong> na reprezentativním vzorku české populace.</p>
+
+      <p>Pokračováním potvrzujete, že jste starší 18 let a souhlasíte s účastí ve výzkumu.</p>
     </div>`,
   choices: ["Začít"],
   data: { trial_kind: "welcome" }
