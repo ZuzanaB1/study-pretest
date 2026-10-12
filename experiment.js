@@ -146,8 +146,10 @@ function semanticSectionHTML(items) {
 function stimulusHTML(stimulusCode) {
   return `
     <section class="stimulus-section">
-      <p class="instruction"><strong>Pozorně si prosím prohlédněte následující příspěvek.</strong>
-      Poté odpovězte na otázky týkající se toho, jak na Vás příspěvek působí.</p>
+      <p class="instruction">
+        <strong>Pozorně si prosím prohlédněte následující příspěvek.</strong>
+        Zaměřte se prosím především na text přímo v grafice. Poté odpovězte na několik otázek týkajících se toho, jak příspěvek působí a co podle Vás zdůrazňuje.
+      </p>
       <img class="stimulus-image" src="${stimulusCode}.png" alt="Příspěvek">
     </section>`;
 }
