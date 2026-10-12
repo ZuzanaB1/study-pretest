@@ -84,7 +84,7 @@ html, body {
 .question-section { margin: 42px auto; }
 
 .question-section h2 {
-  font-size: 24px;
+  font-size: 21px;
   line-height: 1.35;
   margin: 0 auto 8px;
   max-width: 920px;
@@ -116,7 +116,7 @@ html, body {
   max-width: 900px;
   margin: 0 auto 24px;
   text-align: center;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.42;
   font-weight: 650;
   color: #344054;
