@@ -36,6 +36,7 @@ body {
   font-family: "Red Hat Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: clip;
 }
 
 button,
@@ -166,8 +167,9 @@ button:focus-visible {
 
 /* ===== First exposure to each stimulus ===== */
 .stimulus-intro {
-  max-width: 920px;
-  margin: 26px auto 54px;
+  width: min(1080px, calc(100% - 32px));
+  max-width: 1080px;
+  margin: 18px auto 42px;
   text-align: center;
 }
 
@@ -176,13 +178,17 @@ button:focus-visible {
 }
 
 .stimulus-intro h1 {
-  font-size: clamp(25px, 2.25vw, 32px);
+  margin-top: 4px;
+  margin-bottom: 12px;
+  font-size: clamp(25px, 2.15vw, 31px);
+  line-height: 1.18;
 }
 
 .stimulus-intro p {
-  max-width: 720px;
-  margin: 0 auto 22px;
+  max-width: 860px;
+  margin: 0 auto 16px;
   font-size: 16px;
+  line-height: 1.48;
 }
 
 .intro-image-button,
@@ -196,19 +202,22 @@ button:focus-visible {
 
 .intro-image-button {
   display: block;
-  margin: 0 auto 22px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 18px;
   border-radius: 14px;
 }
 
 .intro-stimulus-image {
   display: block;
-  max-width: min(620px, 92vw);
-  max-height: min(68vh, 700px);
-  width: auto;
+  width: min(520px, 92vw);
+  max-width: 100%;
+  max-height: min(82dvh, 900px);
   height: auto;
+  object-fit: contain;
   margin: 0 auto;
   border-radius: 10px;
-  filter: drop-shadow(0 8px 22px rgba(16, 24, 40, .10));
+  filter: drop-shadow(0 10px 28px rgba(16, 24, 40, .12));
 }
 
 .start-evaluation-btn {
@@ -401,29 +410,29 @@ button:focus-visible {
   color: #263346;
 }
 
-/* Semantic differential uses the same vertical rhythm as all other questions.
-   Only the horizontal layout differs to give long Czech anchors enough room. */
+/* Semantic differential: compact, clearly separated rows without screen-sized gaps.
+   On wide screens labels remain beside the scale; responsive rules move them below. */
+.semantic-question {
+  min-height: 172px;
+  padding-top: 24px;
+  padding-bottom: 26px;
+}
+
+.semantic-question + .semantic-question {
+  margin-top: 0;
+}
+
 .semantic-question .scale-control {
-  display: grid;
-  grid-template-columns: minmax(170px, 1fr) auto minmax(170px, 1fr);
-  align-items: center;
-  column-gap: 28px;
-  width: 100%;
+  grid-template-columns: minmax(130px, 165px) minmax(390px, 1fr) minmax(130px, 165px);
+  column-gap: clamp(22px, 2vw, 34px);
+  row-gap: 12px;
 }
 
 .semantic-question .scale-options {
-  width: auto;
-  display: grid;
-  grid-template-columns: repeat(7, 62px);
-  gap: 16px;
-  justify-content: center;
-  align-items: center;
-}
-
-.semantic-question .scale-choice {
-  width: 62px;
-  height: 62px;
-  flex: none;
+  width: 100%;
+  grid-template-columns: repeat(7, minmax(46px, 1fr));
+  column-gap: clamp(10px, 1vw, 16px);
+  justify-items: center;
 }
 
 .semantic-question .endpoint-left {
@@ -437,9 +446,9 @@ button:focus-visible {
 }
 
 .semantic-question .endpoint-label {
-  overflow-wrap: normal;
-  word-break: normal;
-  white-space: nowrap;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: normal;
   font-size: 13px;
 }
 
@@ -645,6 +654,7 @@ button:focus-visible {
 }
 
 .final-question-title {
+  display: block;
   margin: 0 0 14px;
   color: var(--text);
   font-size: 18px;
@@ -695,6 +705,78 @@ button:focus-visible {
   max-width: 760px;
 }
 
+.optional-note {
+  color: var(--text-muted);
+  font-size: .9em;
+  font-weight: 500;
+}
+
+.comment-field {
+  display: block;
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  padding: 13px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  line-height: 1.45;
+}
+
+.comment-field:focus {
+  outline: 3px solid rgba(37, 165, 106, .16);
+  border-color: var(--green);
+}
+
+html.test-mode::after {
+  content: "TESTOVACÍ REŽIM — DATA SE NEUKLÁDAJÍ";
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  z-index: 2000;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: #fff3cd;
+  border: 1px solid #e8c96b;
+  color: #6b5200;
+  font: 700 11px/1.2 "Red Hat Display", sans-serif;
+  letter-spacing: .02em;
+  pointer-events: none;
+}
+
+.launch-loading {
+  min-height: 100dvh;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 14px;
+  padding: 28px;
+  color: var(--text-soft);
+  font-family: "Red Hat Display", Arial, sans-serif;
+  text-align: center;
+}
+
+.launch-loading p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.launch-loading-spinner {
+  width: 34px;
+  height: 34px;
+  border: 3px solid #e4e8ed;
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: launch-spin .8s linear infinite;
+}
+
+@keyframes launch-spin {
+  to { transform: rotate(360deg); }
+}
+
 .launch-error {
   max-width: 720px;
   margin: 70px auto;
@@ -703,10 +785,10 @@ button:focus-visible {
   line-height: 1.55;
 }
 
-/* ===== Tablet / mobile ===== */
-@media (max-width: 1020px) {
+/* ===== Responsive layout ===== */
+@media (max-width: 1260px) and (min-width: 1121px) {
   .evaluation-grid {
-    grid-template-columns: minmax(0, 1.2fr) minmax(300px, .82fr);
+    grid-template-columns: minmax(0, 1.28fr) minmax(300px, .78fr);
     gap: 28px;
   }
 
@@ -716,39 +798,45 @@ button:focus-visible {
   }
 
   .semantic-question .scale-control {
-    grid-template-columns: minmax(145px, 1fr) auto minmax(145px, 1fr);
-    column-gap: 20px;
+    grid-template-columns: minmax(105px, 130px) minmax(330px, 1fr) minmax(105px, 130px);
+    column-gap: 14px;
   }
 
   .semantic-question .scale-options {
-    grid-template-columns: repeat(7, 54px);
-    gap: 10px;
+    column-gap: 8px;
   }
 
-  .semantic-question .scale-choice {
-    width: 54px;
-    height: 54px;
+  .scale-choice {
+    width: 56px;
+    height: 56px;
   }
 
-  .semantic-question .choice-circle {
+  .choice-circle {
     width: 48px;
     height: 48px;
   }
 }
 
-@media (max-width: 820px) {
+/* At smaller notebook/tablet widths the two-column layout becomes too narrow
+   for a neutral 7-point scale. Switch to one column before overlap can occur. */
+@media (max-width: 1120px) {
   #jspsych-content {
     width: 100%;
+    max-width: 100%;
     margin: 0 auto 52px;
+    overflow-x: clip;
   }
 
-  .evaluation-shell {
+  .evaluation-shell,
+  .evaluation-grid,
+  .question-column {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
   }
 
   .evaluation-grid {
     display: block;
-    max-width: 100%;
   }
 
   .stimulus-column,
@@ -756,7 +844,6 @@ button:focus-visible {
     display: none;
   }
 
-  /* The actual photo stays visible at the top throughout answering. */
   .mobile-stimulus-bar {
     position: sticky;
     top: 0;
@@ -775,7 +862,7 @@ button:focus-visible {
     display: flex;
     align-items: center;
     gap: 13px;
-    padding: 7px 18px 7px 16px;
+    padding: 7px max(18px, env(safe-area-inset-right)) 7px max(16px, env(safe-area-inset-left));
     text-align: left;
     cursor: zoom-in;
   }
@@ -816,12 +903,12 @@ button:focus-visible {
   }
 
   .question-column {
-    width: min(100%, 760px);
+    width: min(100%, 780px);
     margin: 0 auto;
   }
 
   .section-intro {
-    padding: 21px 22px 19px;
+    padding: 21px clamp(12px, 4vw, 22px) 19px;
   }
 
   .section-intro h2 {
@@ -835,8 +922,19 @@ button:focus-visible {
 
   .scale-question {
     min-height: 198px;
-    padding: 22px 22px 21px;
+    padding: 22px clamp(12px, 4vw, 22px) 21px;
     scroll-margin-top: 112px;
+    overflow: hidden;
+  }
+
+  .semantic-question {
+    min-height: 168px;
+    padding-top: 22px;
+    padding-bottom: 24px;
+  }
+
+  .semantic-question + .semantic-question {
+    margin-top: 0;
   }
 
   .statement-text {
@@ -846,11 +944,14 @@ button:focus-visible {
     font-weight: 600;
   }
 
-  /* 16P-like mobile arrangement: circles on one row, endpoint labels below. */
+  /* On one-column layouts all endpoints sit below the scale. This keeps the
+     seven response points neutral and prevents long labels from covering 1/7. */
   .scale-control,
   .semantic-question .scale-control {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-template-areas:
       "options options"
       "left right";
@@ -860,45 +961,63 @@ button:focus-visible {
   .scale-options,
   .semantic-question .scale-options {
     grid-area: options;
+    width: 100%;
+    min-width: 0;
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 3px;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    justify-items: center;
+    align-items: center;
+    column-gap: clamp(3px, 1vw, 9px);
   }
 
+  .semantic-question .scale-options {
+    column-gap: clamp(4px, 1.35vw, 12px);
+  }
+
+  .scale-choice,
   .semantic-question .scale-choice {
-    flex: none;
+    width: 100%;
+    max-width: 54px;
+    height: auto;
+    aspect-ratio: 1;
+    min-width: 0;
+    justify-self: center;
   }
 
-  .endpoint-left {
+  .choice-circle,
+  .semantic-question .choice-circle {
+    width: min(48px, calc(100% - 4px));
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .endpoint-left,
+  .semantic-question .endpoint-left {
     grid-area: left;
+    justify-self: start;
     text-align: left;
   }
 
-  .endpoint-right {
+  .endpoint-right,
+  .semantic-question .endpoint-right {
     grid-area: right;
+    justify-self: end;
     text-align: right;
   }
 
-  .endpoint-label {
+  .endpoint-label,
+  .semantic-question .endpoint-label {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
     font-size: 13px;
     line-height: 1.18;
     font-weight: 400;
   }
 
-  .scale-choice {
-    width: 54px;
-    height: 54px;
-  }
-
-  .choice-circle {
-    width: 48px;
-    height: 48px;
-  }
-
   .choice-number {
     font-size: 13.5px;
   }
-
 
   .completion-note {
     margin-left: 22px;
@@ -927,8 +1046,9 @@ button:focus-visible {
   }
 
   .intro-stimulus-image {
-    max-width: min(500px, 94vw);
-    max-height: 61vh;
+    width: min(540px, 94vw);
+    max-width: 100%;
+    max-height: min(78dvh, 860px);
   }
 
   .survey-card {
@@ -958,9 +1078,27 @@ button:focus-visible {
 @media (max-width: 430px) {
   .mobile-stimulus-button {
     min-height: 92px;
-    padding-left: 13px;
-    padding-right: 13px;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
   }
+
+  .trait-section .endpoint-right {
+  width: 88px;
+  max-width: 88px;
+  white-space: normal;
+  overflow-wrap: normal;
+  text-align: right;
+  line-height: 1.2;
+}
+
+.trait-section .endpoint-left {
+  width: 88px;
+  max-width: 88px;
+  white-space: normal;
+  overflow-wrap: normal;
+  text-align: left;
+  line-height: 1.2;
+}
 
   .mobile-stimulus-button img {
     width: 45px;
@@ -968,38 +1106,71 @@ button:focus-visible {
   }
 
   .scale-question {
-    min-height: 194px;
-    padding-left: 16px;
-    padding-right: 16px;
+    min-height: 190px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .semantic-question {
+    min-height: 158px;
+    padding-top: 20px;
+    padding-bottom: 22px;
+  }
+
+  .semantic-question + .semantic-question {
+    margin-top: 0;
+  }
+
+  .intro-stimulus-image {
+    width: min(94vw, 500px);
+    max-height: min(74dvh, 800px);
   }
 
   .section-intro {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
   .statement-text {
     font-size: 16.5px;
   }
 
-  .scale-choice {
-    width: 50px;
-    height: 50px;
+  .scale-choice,
+  .semantic-question .scale-choice {
+    max-width: 50px;
   }
 
-  .choice-circle {
-    width: 44px;
-    height: 44px;
+  .choice-circle,
+  .semantic-question .choice-circle {
+    width: min(44px, calc(100% - 4px));
   }
 
   .choice-number {
     font-size: 12px;
   }
 
-  .endpoint-label {
+  .endpoint-label,
+  .semantic-question .endpoint-label {
     font-size: 12.5px;
   }
+}
 
+@media (max-width: 350px) {
+  .scale-question,
+  .section-intro {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .scale-options,
+  .semantic-question .scale-options {
+    column-gap: 2px;
+  }
+
+  .endpoint-label,
+  .semantic-question .endpoint-label {
+    font-size: 11.5px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1029,90 +1200,4 @@ button:focus-visible {
 form > .jspsych-btn,
 form > input.jspsych-btn {
   margin: 24px 12px 10px;
-}
-
-
-/* ==========================================================
-   Semantic differential alignment patch
-   Keep the exact same 1–7 geometry as the trait questions.
-   Only the endpoint words differ.
-   ========================================================== */
-@media (min-width: 1021px) {
-  .semantic-question .scale-control {
-    grid-template-columns: minmax(92px, 116px) minmax(320px, 1fr) minmax(92px, 116px);
-    gap: 12px;
-  }
-
-  .semantic-question .scale-options {
-    width: 100%;
-    grid-template-columns: repeat(7, minmax(42px, 1fr));
-    gap: clamp(4px, .75vw, 11px);
-    justify-items: center;
-  }
-
-  .semantic-question .scale-choice {
-    width: 62px;
-    height: 62px;
-  }
-
-  .semantic-question .choice-circle {
-    width: 52px;
-    height: 52px;
-  }
-
-  .semantic-question .endpoint-label {
-    width: max-content;
-    white-space: nowrap;
-    font-size: 13.5px;
-  }
-
-  .semantic-question .endpoint-left {
-    justify-self: end;
-    text-align: right;
-  }
-
-  .semantic-question .endpoint-right {
-    justify-self: start;
-    text-align: left;
-  }
-}
-
-@media (min-width: 821px) and (max-width: 1020px) {
-  .semantic-question .scale-control {
-    grid-template-columns: minmax(82px, 100px) minmax(300px, 1fr) minmax(82px, 100px);
-    gap: 8px;
-  }
-
-  .semantic-question .scale-options {
-    width: 100%;
-    grid-template-columns: repeat(7, minmax(42px, 1fr));
-    gap: clamp(4px, .75vw, 11px);
-    justify-items: center;
-  }
-
-  .semantic-question .scale-choice {
-    width: 62px;
-    height: 62px;
-  }
-
-  .semantic-question .choice-circle {
-    width: 52px;
-    height: 52px;
-  }
-
-  .semantic-question .endpoint-label {
-    width: max-content;
-    white-space: nowrap;
-    font-size: 13.5px;
-  }
-
-  .semantic-question .endpoint-left {
-    justify-self: end;
-    text-align: right;
-  }
-
-  .semantic-question .endpoint-right {
-    justify-self: start;
-    text-align: left;
-  }
 }
