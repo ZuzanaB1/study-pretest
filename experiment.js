@@ -720,7 +720,7 @@ const welcome = {
       <h1>Výzkum politické komunikace</h1>
       <p>V následujícím dotazníku uvidíte <strong>tři krátké politické příspěvky</strong> podobné těm, které se mohou objevit na sociálních sítích. Po každém příspěvku budete požádán/a o jeho zhodnocení.</p>
       <p>Při hodnocení prosím vycházejte ze svého prvního dojmu. Neexistují správné ani špatné odpovědi.</p>
-      <p>Vyplnění dotazníku zabere přibližně <strong>8 minut</strong>. Odpovědi jsou zcela anonymní a budou využity pouze pro účely akademického výzkumu. Výzkum je součástí širšího projektu, jehož další fáze bude realizována ve spolupráci s agenturou <strong>NMS Market Research</strong> na reprezentativním vzorku české populace.</p>
+      <p>Vyplnění dotazníku zabere přibližně <strong>8 minut</strong>. Odpovědi jsou zcela anonymní a budou využity pro účely akademického výzkumu v rámci diplomové práce na Fakultě sociálních věd Univerzity Karlovy. Anonymní data mohou být zveřejněna ve veřejném vědeckém repozitáři (OSF). Výzkum je součástí širšího projektu, jehož další fáze bude realizována ve spolupráci s agenturou <strong>NMS Market Research</strong> na reprezentativním vzorku české populace.</p>
       <p>V případě dotazů můžete kontaktovat výzkumníka na <a href="mailto:${RESEARCHER_EMAIL}">${RESEARCHER_EMAIL}</a>.</p>
       <p>Pokračováním potvrzujete, že jste starší 18 let a souhlasíte s účastí ve výzkumu.</p>
     </div>`,
