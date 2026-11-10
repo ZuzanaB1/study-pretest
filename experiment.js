@@ -1,5 +1,5 @@
 const DATAPIPE_EXPERIMENT_ID = "G8odHllMqTuG";
-const STUDY_VERSION = "pretest-2026-10-27-v5";
+const STUDY_VERSION = "pretest-2026-11-10-v6";
 const RESEARCHER_EMAIL = "46029318@fsv.cuni.cz";
 const TOPIC_NAMES = {
   A: "zdravotnictvi",
