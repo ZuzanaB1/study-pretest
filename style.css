@@ -1083,7 +1083,7 @@ html.test-mode::after {
   }
 
   .trait-section .endpoint-right {
-  width: 88px;
+  width: min-content;
   max-width: 88px;
   white-space: normal;
   overflow-wrap: normal;
@@ -1092,7 +1092,7 @@ html.test-mode::after {
 }
 
 .trait-section .endpoint-left {
-  width: 88px;
+  width: min-content;
   max-width: 88px;
   white-space: normal;
   overflow-wrap: normal;
