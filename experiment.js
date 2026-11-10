@@ -309,7 +309,7 @@ function traitSectionHTML(items) {
         ${items.map(item => `
           <div class="scale-question" data-question-id="${item.id}" data-question-group="trait">
             <div class="statement-text">${item.text}</div>
-            ${scaleOptions(item.id, "Vůbec nevystihuje", "Vystihuje velmi dobře")}
+            ${scaleOptions(item.id, "Vůbec nevystihuje", "Zcela vystihuje")}
           </div>`).join("")}
       </div>
     </section>`;
